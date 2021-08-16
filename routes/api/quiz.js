@@ -36,7 +36,6 @@ route.get('/quiz/:id', async (req,res)=>{
                 participantsQuizId: req.params.id
             }
         })
-        console.log(quizzes)
         res.status(200).send({questions, participants, quizzes})
       }catch(e){
           console.error(e);

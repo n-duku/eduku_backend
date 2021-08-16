@@ -28,13 +28,27 @@ route.post('/login', (req, res) => {
     });
 })
 
+route.get('/users', async (req,res) => {
+    try{
+        const users = await db.models.users.findAll({
+            where: {
+                isAdmin: false 
+            }
+        })
+       res.status(200).send(users)
+      }catch(e){
+          console.error(e);
+          res.status(400).send(e)
+      }
+})
+
 route.post('/user', async (req, res) => {
     try {
         const created = await db.models.users.create(req.body)
         res.status(200).send(created)
     } catch (e) {
         console.log(e);
-        res.status(400).send({ error: 'Massa make steady' })
+        res.status(400).send({ error: 'Wrong format' })
     }
 })
 

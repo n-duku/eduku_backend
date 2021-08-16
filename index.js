@@ -31,7 +31,7 @@ app.use('/api/v1', verifyToken, routes.question);
 
 
 app.get('/', (req,res)=>{
-    res.status(200).send('Hello, welcome to my API, we go do am BIG!');
+    res.status(200).send('Hello, welcome to my API!');
 })
 
 
@@ -39,10 +39,8 @@ app.listen(port, async ()=>{
     try{
         const db = require('./config/db');
         await db.authenticate()
-        // await db.sync({alter: true});
-        // console.log(db.models)
     }catch(e){
         console.log(e);
     }
-    console.log(`We live baby! on Port: ${port}`);
+    console.log(`Server is running on Port: ${port}`);
 })
