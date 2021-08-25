@@ -52,6 +52,21 @@ route.post('/user', async (req, res) => {
     }
 })
 
+route.delete('/user/:id', async (req, res) => {
+    try {
+        const deleted = await db.models.users.destroy({
+            where: {
+                user_id: req.params.id
+            }
+        })
+        res.status(200).send({message: `${deleted} has been deleted`})
+    } catch (e) {
+        console.log(e);
+        res.status(400).send({ error: 'Wrong format' })
+    }
+})
+
+
 
 
 module.exports = route;

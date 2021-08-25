@@ -60,8 +60,18 @@ route.put('/quiz', (req, res)=>{
 })
 
 
-route.delete('/quiz', (req, res)=>{
-    res.status(200).send({1: 'first question'})
+route.delete('/quiz/:id', async (req, res)=>{
+    try {
+        const deleted = await db.models.quiz.destroy({
+            where: {
+                quiz_id: req.params.id
+            }
+        })
+        res.status(200).send({message: `${deleted} has been deleted`})
+    } catch (e) {
+        console.log(e);
+        res.status(400).send({ error: 'Could not find quiz' })
+    }
 })
 
 
